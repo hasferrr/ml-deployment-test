@@ -1,0 +1,50 @@
+import { useState } from 'react'
+import axios from 'axios'
+
+const App = () => {
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [result, setResult] = useState('')
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+
+  const handleSubmit = async () => {
+    if (!selectedFile) {
+      alert('Please select a file before submitting.')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000', formData)
+      console.log(response.data)
+      setResult(response.data.prediction)
+    } catch (error) {
+      console.error('Error uploading file:', error)
+    }
+  }
+
+  return (
+    <div>
+      <h1>Image Number Prediction</h1>
+
+      <div>
+        <input type="file" onChange={handleFileChange} />
+      </div>
+
+      <div>
+        <button onClick={handleSubmit}>Predict</button>
+      </div>
+
+      <div>
+        <p>Result: {result}</p>
+      </div>
+
+    </div>
+  )
+}
+
+export default App
