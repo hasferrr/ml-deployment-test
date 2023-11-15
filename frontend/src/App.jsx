@@ -15,6 +15,7 @@ const App = () => {
       return
     }
 
+    // https://developer.mozilla.org/en-US/docs/Web/API/FormData
     const formData = new FormData()
     formData.append('file', selectedFile)
 
@@ -28,7 +29,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <h1>Image Number Prediction</h1>
 
       <div>
@@ -43,7 +44,7 @@ const App = () => {
         <p>Result: {result}</p>
       </div>
 
-    </div>
+    </>
   )
 }
 
