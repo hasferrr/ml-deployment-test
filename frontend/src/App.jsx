@@ -5,14 +5,17 @@ const App = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [result, setResult] = useState('')
 
-  const baseUrl = '/api'
+  const baseUrl = import.meta.env.VITE_BASE_URL
+    ? import.meta.env.VITE_BASE_URL
+    : 'http://localhost:5000'
 
   useEffect(() => {
     axios.get(baseUrl)
       .then((response) => {
+        console.log(baseUrl)
         console.log(response.data)
       })
-  }, [])
+  }, [baseUrl])
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0])

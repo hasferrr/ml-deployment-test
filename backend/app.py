@@ -7,7 +7,7 @@ from tensorflow import keras
 import numpy as np
 from PIL import Image
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 
 
@@ -63,4 +63,4 @@ def index():
 
 
 if __name__ == "__main__":
-  app.run()
+  app.run(debug=True)

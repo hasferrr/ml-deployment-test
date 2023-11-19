@@ -1,0 +1,28 @@
+steps:
+  # Build the container image and push to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "asia-southeast2-docker.pkg.dev/test-docker-405606/ml-frontend/ml-frontend",
+        ".",
+      ]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "ml-frontend",
+        "--image",
+        "asia-southeast2-docker.pkg.dev/test-docker-405606/ml-frontend/ml-frontend",
+        "--region",
+        "asia-southeast2",
+        "--port",
+        "80",
+        "--allow-unauthenticated",
+      ]
+images:
+  - "asia-southeast2-docker.pkg.dev/test-docker-405606/ml-frontend/ml-frontend"
