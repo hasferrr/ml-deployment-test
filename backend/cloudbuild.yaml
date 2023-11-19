@@ -1,5 +1,5 @@
 steps:
-  # Build the container image and push to Artifact Registry
+  # Build the container image
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
@@ -7,6 +7,13 @@ steps:
         "-t",
         "asia-southeast2-docker.pkg.dev/test-docker-405606/ml-deployment/ml-deployment",
         ".",
+      ]
+      # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "asia-southeast2-docker.pkg.dev/test-docker-405606/ml-deployment/ml-deployment",
       ]
   # Deploy container image to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
