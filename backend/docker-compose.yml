@@ -1,0 +1,6 @@
+services:
+  app:
+    image: ml-deployment
+    build: .
+    ports:
+    - 5000:8080

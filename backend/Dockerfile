@@ -11,10 +11,10 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install production dependencies.
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 5000 to the outside world
-EXPOSE 5000
+# Expose port 8080 to the outside world
+EXPOSE 8080
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
@@ -22,4 +22,4 @@ EXPOSE 5000
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 # CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 'app:app'
-CMD exec gunicorn --bind :5000 --workers 2 --threads 2 'app:app'
+CMD exec gunicorn -b 0.0.0.0:8080 --workers 2 --threads 4 'app:app'

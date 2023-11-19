@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [result, setResult] = useState('')
+
+  const baseUrl = '/api'
+
+  useEffect(() => {
+    axios.get(baseUrl)
+      .then((response) => {
+        console.log(response.data)
+      })
+  }, [])
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -20,7 +29,7 @@ const App = () => {
     formData.append('file', selectedFile)
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000', formData)
+      const response = await axios.post(baseUrl, formData)
       console.log(response.data)
       setResult(response.data.prediction)
     } catch (error) {
