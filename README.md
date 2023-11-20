@@ -22,7 +22,7 @@ flask run
 ## Production mode (Docker)
 
 1. Change `Dockerfile`
-1. Execure docker compose
+1. Execute docker compose
 
 ```bash
 cd frontend
