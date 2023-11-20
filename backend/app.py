@@ -13,7 +13,9 @@ from flask_cors import CORS
 
 # ======================= Model Handler =======================
 
-model = keras.models.load_model("nn.h5")
+MODEL_URL = "https://storage.googleapis.com/ml-model-wkwk/nn.h5"
+MODEL_PATH = tf.keras.utils.get_file("nn.h5", MODEL_URL, cache_subdir="models")
+model = keras.models.load_model(MODEL_PATH)
 
 def transform_image(pillow_image):
   data = np.asarray(pillow_image)
