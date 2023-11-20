@@ -26,15 +26,21 @@ flask run
 
 ```bash
 cd frontend
-docker compose -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.yml up -d
 
 cd ../backend
-docker compose -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.yml up -d
+```
+
+Stops and removes the containers, services, and associated volumes
+
+```bash
+docker compose -f docker-compose.yml down --volumes
 ```
 
 ## Production mode (deploy container image to Cloud Run)
 
-1. Change project ID, region, image name, and other specification first to the `build.sh`, `cloudbuild.yaml`, and `Dockerfile`
+1. Change project ID, region, image name, and other specification first on the `build.sh`, `cloudbuild.yaml`, and `Dockerfile`
 1. Create Docker repository in the Artifact Registry
 1. Execute the bash script
 
